@@ -1,3 +1,11 @@
+console.log("script loaded");
+
+function deleteTask(index) {
+  console.log("刪除任務", index);
+  tasks.splice(index, 1);
+  renderTasks();
+}
+
 const taskInput = document.getElementById('task-input');
 const dateInput = document.getElementById('date-input');
 const priorityInput = document.getElementById('priority-input');
@@ -95,3 +103,4 @@ sortPriorityBtn.addEventListener('click', () => setSort('priority'));
 
 // 頁面初始渲染
 renderTasks();
+
