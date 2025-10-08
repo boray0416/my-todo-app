@@ -2,6 +2,7 @@ console.log("script loaded");
 
 const taskInput = document.getElementById('task-input');
 const dateInput = document.getElementById('date-input');
+const categoryInput = document.getElementById('category-input');
 const priorityInput = document.getElementById('priority-input');
 const addBtn = document.getElementById('add-btn');
 const taskList = document.getElementById('task-list');
@@ -44,13 +45,15 @@ function renderTasks() {
   taskList.innerHTML = '';
   sortedTasks.forEach((task) => {
     const originalIndex = tasks.findIndex(t => 
-      t.name === task.name && t.date === task.date && t.priority === task.priority
+      t.name === task.name && t.date === task.date && t.priority === task.priority && t.category === task.category
     );
 
     const li = document.createElement('li');
     li.className = 'task-item';
     li.innerHTML = `
-      <div class="task-info">${task.name} — ${task.date} — <strong>${task.priority}</strong></div>
+      <div class="task-info">
+        ${task.name} — ${task.date} — <strong>${task.priority}</strong> — <em>${task.category}</em>
+      </div>
       <button onclick="deleteTask(${originalIndex})">刪除</button>
     `;
     taskList.appendChild(li);
@@ -63,14 +66,16 @@ addBtn.addEventListener('click', () => {
   const name = taskInput.value.trim();
   const date = dateInput.value;
   const priority = priorityInput.value;
+  const category = categoryInput.value;
   if (!name || !date) {
     alert('請輸入任務名稱與日期');
     return;
   }
-  tasks.push({ name, date, priority });
+  tasks.push({ name, date, priority, category });
   taskInput.value = '';
   dateInput.value = '';
   priorityInput.value = '中';
+  categoryInput.value = '工作';
   renderTasks();
 });
 
