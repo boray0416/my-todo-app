@@ -117,6 +117,7 @@ h1 {
 }
 
 .task-info {
+  font-family: 'Noto Sans TC', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
   color: #333;
   flex-grow: 1;
@@ -142,3 +143,4 @@ h1 {
 .task-item button:hover {
   background-color: #b91c1c;
 }
+
