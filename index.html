@@ -2,8 +2,8 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>待辦清單 + 優先排序</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>我的待辦清單（優先排序版）</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -11,6 +11,11 @@
   <div id="input-area">
     <input type="text" id="task-input" placeholder="輸入任務名稱…" />
     <input type="date" id="date-input" />
+    <select id="priority-input">
+      <option value="高">高</option>
+      <option value="中" selected>中</option>
+      <option value="低">低</option>
+    </select>
     <button id="add-btn">新增任務</button>
   </div>
   <ul id="task-list"></ul>
