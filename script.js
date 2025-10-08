@@ -10,6 +10,8 @@ const taskList = document.getElementById('task-list');
 const sortDateBtn = document.getElementById('sort-date-btn');
 const sortPriorityBtn = document.getElementById('sort-priority-btn');
 
+const categoryFilter = document.getElementById('category-filter');
+
 let tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
 
 // 優先級權重，用來排序
@@ -19,20 +21,27 @@ const priorityWeight = {
   '低': 1,
 };
 
-// 目前排序方式，預設是「依日期排序」
+// 預設排序：日期、篩選：全部
 let currentSort = 'date';
+let currentFilter = 'all';
 
 function renderTasks() {
-  let sortedTasks = [...tasks]; // 複製陣列
+  let filteredTasks = [...tasks];
 
+  // 篩選類別
+  if (currentFilter !== 'all') {
+    filteredTasks = filteredTasks.filter(task => task.category === currentFilter);
+  }
+
+  // 排序
   if (currentSort === 'date') {
-    sortedTasks.sort((a, b) => {
+    filteredTasks.sort((a, b) => {
       if (a.date < b.date) return -1;
       if (a.date > b.date) return 1;
       return priorityWeight[b.priority] - priorityWeight[a.priority];
     });
   } else if (currentSort === 'priority') {
-    sortedTasks.sort((a, b) => {
+    filteredTasks.sort((a, b) => {
       if (priorityWeight[b.priority] !== priorityWeight[a.priority]) {
         return priorityWeight[b.priority] - priorityWeight[a.priority];
       }
@@ -43,9 +52,12 @@ function renderTasks() {
   }
 
   taskList.innerHTML = '';
-  sortedTasks.forEach((task) => {
-    const originalIndex = tasks.findIndex(t => 
-      t.name === task.name && t.date === task.date && t.priority === task.priority && t.category === task.category
+  filteredTasks.forEach((task) => {
+    const originalIndex = tasks.findIndex(t =>
+      t.name === task.name &&
+      t.date === task.date &&
+      t.priority === task.priority &&
+      t.category === task.category
     );
 
     const li = document.createElement('li');
@@ -79,13 +91,13 @@ addBtn.addEventListener('click', () => {
   renderTasks();
 });
 
-// 刪除任務，這邊用全域函式方便 HTML onclick 呼叫
+// 刪除任務
 function deleteTask(index) {
   tasks.splice(index, 1);
   renderTasks();
 }
 
-// 切換排序方式並更新按鈕狀態
+// 切換排序
 function setSort(sortType) {
   currentSort = sortType;
   if (sortType === 'date') {
@@ -98,8 +110,14 @@ function setSort(sortType) {
   renderTasks();
 }
 
+// 篩選類別事件
+categoryFilter.addEventListener('change', () => {
+  currentFilter = categoryFilter.value;
+  renderTasks();
+});
+
 sortDateBtn.addEventListener('click', () => setSort('date'));
 sortPriorityBtn.addEventListener('click', () => setSort('priority'));
 
-// 頁面初始渲染
+// 初始載入
 renderTasks();
