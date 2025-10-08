@@ -9,6 +9,21 @@ body {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+#input-area input,
+#input-area select {
+  flex: 1 1 120px;
+  min-width: 100px;
+  padding: 6px;
+  font-size: 16px;
+}
+
+#add-btn {
+  padding: 6px 12px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 #task-list {
@@ -23,6 +38,11 @@ body {
   padding: 8px;
   background-color: #f2f2f2;
   border-radius: 4px;
+  align-items: center;
+}
+
+.task-info {
+  flex-grow: 1;
 }
 
 .task-item button {
