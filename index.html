@@ -8,6 +8,8 @@
 </head>
 <body>
   <h1>我的待辦清單</h1>
+
+  <!-- 任務輸入區 -->
   <div id="input-area">
     <input type="text" id="task-input" placeholder="輸入任務名稱…" />
     <input type="date" id="date-input" />
@@ -25,17 +27,32 @@
       <option value="中" selected>中</option>
       <option value="低">低</option>
     </select>
+
     <button id="add-btn">新增任務</button>
   </div>
 
+  <!-- 分類篩選區 -->
+  <div id="filter-area" style="margin: 10px 0;">
+    <label for="category-filter">篩選類別：</label>
+    <select id="category-filter">
+      <option value="all">全部</option>
+      <option value="工作">工作</option>
+      <option value="學習">學習</option>
+      <option value="研究">研究</option>
+      <option value="文書">文書</option>
+      <option value="行事曆">行事曆</option>
+    </select>
+  </div>
+
+  <!-- 排序按鈕 -->
   <div id="view-buttons" style="margin-bottom: 20px;">
     <button id="sort-date-btn" class="sort-btn active">依日期排序</button>
     <button id="sort-priority-btn" class="sort-btn">依重要性排序</button>
   </div>
 
+  <!-- 任務清單 -->
   <ul id="task-list"></ul>
 
   <script src="script.js"></script>
 </body>
 </html>
-
