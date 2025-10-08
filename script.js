@@ -1,11 +1,5 @@
 console.log("script loaded");
 
-function deleteTask(index) {
-  console.log("刪除任務", index);
-  tasks.splice(index, 1);
-  renderTasks();
-}
-
 const taskInput = document.getElementById('task-input');
 const dateInput = document.getElementById('date-input');
 const priorityInput = document.getElementById('priority-input');
@@ -48,9 +42,10 @@ function renderTasks() {
   }
 
   taskList.innerHTML = '';
-  sortedTasks.forEach((task, i) => {
-    // 找原始 tasks 中的 index，用來刪除
-    const originalIndex = tasks.indexOf(task);
+  sortedTasks.forEach((task) => {
+    const originalIndex = tasks.findIndex(t => 
+      t.name === task.name && t.date === task.date && t.priority === task.priority
+    );
 
     const li = document.createElement('li');
     li.className = 'task-item';
@@ -103,4 +98,3 @@ sortPriorityBtn.addEventListener('click', () => setSort('priority'));
 
 // 頁面初始渲染
 renderTasks();
-
